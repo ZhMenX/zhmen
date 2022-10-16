@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "spring.hikari.minimum-idle",
+      "type": "java.lang.String",
+      "description": "Description for spring.hikari.minimum-idle."
+    }
+  ]
+}
