@@ -18,14 +18,11 @@ export default {
       userInfo: getUserInfo(),
     }
   },
-  created() {
-    removeToken();
-    removeIsAdmin();
-    removeUserInfo()
-  },
   methods: {
     logout: function () {
-      removeToken()
+      removeToken();
+      removeUserInfo();
+      removeIsAdmin();
       this.$http.get("/user/logout").then(res =>{
          this.$router.go(0)
       })

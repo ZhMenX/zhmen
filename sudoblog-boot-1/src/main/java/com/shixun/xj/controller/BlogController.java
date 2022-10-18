@@ -30,6 +30,7 @@ public class BlogController {
         return Result.success(blogs, (long) blogs.size());
     }
 
+    //使用Get请求获取博客列表
     @GetMapping("/article")
     @PreAuthorize("hasAnyAuthority('aricle','disucss','system:aricle:list','system:discuss:list')")
     public Result list(@RequestParam("currentPage") Integer currentPage, @RequestParam("pageSize") Integer pageSize) {

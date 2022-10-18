@@ -93,7 +93,7 @@ export default {
   },
   created() {
     this.watchToken(getToken());
-
+    console.log(getToken());
     this.watchAdmin(getIsAdmin())
   },
   components:{

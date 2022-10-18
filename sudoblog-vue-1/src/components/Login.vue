@@ -49,9 +49,9 @@ export default {
     return {
       user:{
         id:null,
-        userName: '',
-        nickName: '',
-        password:null,
+        userName: 'zm',
+        nickName: 'zhMen',
+        password:'123456',
         status:null,
         email:'',
         phonenumber:null,
@@ -90,7 +90,7 @@ export default {
       _this.user.password = _this.password2;
       //清空user信息
       removeUserInfo()
-      removeToken()
+      //removeToken()
       this.$http.post("/user/login", _this.user,{headers: {isToken: false}})
         .then(res => {
           console.log(res.data)

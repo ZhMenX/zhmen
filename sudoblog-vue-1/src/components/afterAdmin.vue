@@ -9,7 +9,8 @@ export default {
   name: "afterAdmin",
   methods: {
     linkRouter: function (viewName) {
-      this.$router.push({ name: viewName });
+      //this.$router.push({ name: viewName });
+      window.location.href = "http://localhost:9999/#/goods/Goods"  // 这个地址是你要跳转的项目url。
     },
   }
 };

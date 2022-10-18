@@ -11,16 +11,6 @@ module.exports = {
                 })
             ]
         },
-        proxy: {
-            '/api': {
-                target: 'http://localhost:8090',
-                changeOrigin: true,
-                ws: true,
-                pathRewrite: {
-                    '^/api': ''
-                }
-            }
-        }
     }
 };
 const {defineConfig} = require('@vue/cli-service')
