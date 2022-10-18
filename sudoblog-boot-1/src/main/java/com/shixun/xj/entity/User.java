@@ -27,6 +27,11 @@ import java.util.Date;
 public class User implements Serializable {
     private static final long serialVersionUID = -40356785423868312L;
 
+    public User(String userName,String password){
+        this.userName = userName;
+        this.password = password;
+    }
+
     /**
      * 主键
      */

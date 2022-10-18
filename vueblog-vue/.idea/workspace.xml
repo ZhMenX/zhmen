@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d0acb1a1-1c9d-4415-a676-150a598f5089" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../sudoblog-vue-1/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../sudoblog-vue-1/src/router/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2EmfqHFThIP6VnTjEUhSVxg8ND0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "E:/shixun/SUDOtest/sudoblog-backstage",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="npm.serve">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="serve" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.serve" />
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d0acb1a1-1c9d-4415-a676-150a598f5089" name="Changes" comment="" />
+      <created>1663205869614</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1663205869614</updated>
+      <workItem from="1663205879853" duration="3538000" />
+      <workItem from="1663229954544" duration="2523000" />
+      <workItem from="1663290919663" duration="1580000" />
+      <workItem from="1663306127603" duration="2903000" />
+      <workItem from="1663377396236" duration="308000" />
+      <workItem from="1663377725856" duration="340000" />
+      <workItem from="1663378146928" duration="1778000" />
+      <workItem from="1663461511718" duration="4302000" />
+      <workItem from="1663480715715" duration="3781000" />
+      <workItem from="1663499733108" duration="1577000" />
+      <workItem from="1663545165899" duration="9605000" />
+      <workItem from="1663635727568" duration="1584000" />
+      <workItem from="1663732272940" duration="1174000" />
+      <workItem from="1663807456205" duration="1259000" />
+      <workItem from="1663831169834" duration="1723000" />
+      <workItem from="1663894579991" duration="6879000" />
+      <workItem from="1663940500163" duration="1191000" />
+      <workItem from="1663985732163" duration="2358000" />
+      <workItem from="1664027347652" duration="2437000" />
+      <workItem from="1664090806266" duration="4245000" />
+      <workItem from="1664154688139" duration="1261000" />
+      <workItem from="1664281923727" duration="297000" />
+      <workItem from="1664526208809" duration="2872000" />
+      <workItem from="1666006461794" duration="2322000" />
+      <workItem from="1666076389615" duration="182000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

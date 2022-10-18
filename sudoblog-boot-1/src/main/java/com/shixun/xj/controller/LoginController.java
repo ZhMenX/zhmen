@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author zhMen
  * @createTime 2022/9/30 9:47
@@ -27,6 +30,12 @@ public class LoginController {
         //登录
         return loginService.login(user);
     }
+    @PostMapping("/login")
+    public ResponseResult AdminLogin(@RequestBody User user){
+        System.out.println(user.getUserName()+"有没有");
+        return loginService.login(user);
+    }
+
 
     @GetMapping("/user/logout")
     public ResponseResult logout(){

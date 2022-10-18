@@ -1,7 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import el from "element-ui/src/locale/lang/el";
-import store from "@/store";
 import { getFromPath, getToken, setFromPath } from "@/api/auth";
 Vue.use(VueRouter);
 

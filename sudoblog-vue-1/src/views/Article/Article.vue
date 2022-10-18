@@ -226,7 +226,6 @@ export default {
         currentPage : this.searchFrom.currentPage,
         pageSize : this.searchFrom.pageSize
       }
-
       this.$http.get("/article",{params:this.searchFrom})
         .then(function(res) {
           _this.blogs=[]

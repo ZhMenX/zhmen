@@ -90,9 +90,8 @@ export default {
       _this.user.password = _this.password2;
       //清空user信息
       removeUserInfo()
-      //removeToken()
-      this.$http.post("/user/login", _this.user,{headers: {isToken: false}})
-        .then(res => {
+      removeToken()
+      this.$http.post("/user/login", _this.user,{headers: {isToken: false}}).then(res => {
           console.log(res.data)
           setToken(res.data.data.token)
           console.log(res.data.data.token)
