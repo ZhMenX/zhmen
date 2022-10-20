@@ -3,12 +3,12 @@
 */
 <template>
   <el-menu default-active="2" :collapse="collapsed" collapse-transition router :default-active="$route.path" unique-opened class="el-menu-vertical-demo" background-color="#334157" text-color="#fff" active-text-color="#ffd04b">
-    <div class="logo box">
-      <img class="logoimg" src="../assets/logo.png" alt="">
+    <div class="logo_box">
+      <img class="logo_img" src="../assets/logo.png" alt="">
     </div>
     <el-submenu v-for="menu in allmenu" :key="menu.menuid" :index="menu.menuname">
       <template slot="title">
-        <i class="iconfont" :class="menu.icon"></i>
+        <i class="iconfont" :class="menu.icon" style="margin-right: 10px"></i>
         <span>{{menu.menuname}}</span>
       </template>
       <el-menu-item-group>
@@ -37,14 +37,14 @@ export default {
       data: [
         {
           menuid: 1,
-          icon: 'li-icon-xiangmuguanli',
+          icon: 'el-icon-chat-line-square',
           menuname: '文章管理',
           hasThird: null,
           url: null,
           menus: [
             {
               menuid: 2,
-              icon: 'icon-cat-skuQuery',
+              icon: 'el-icon-reading',
               menuname: '博客管理',
               hasThird: 'N',
               url: 'Article/Blogs',
@@ -54,14 +54,14 @@ export default {
         },
         {
           menuid: 33,
-          icon: 'li-icon-dingdanguanli',
+          icon: 'el-icon-goods',
           menuname: '订单管理',
           hasThird: null,
           url: null,
           menus: [
             {
               menuid: 34,
-              icon: 'icon-order-manage',
+              icon: 'el-icon-shopping-cart-full',
               menuname: '交易订单',
               hasThird: 'N',
               url: 'pay/Order',
@@ -71,14 +71,14 @@ export default {
         },
         {
           menuid: 71,
-          icon: 'li-icon-xitongguanli',
+          icon: 'el-icon-s-tools',
           menuname: '系统管理',
           hasThird: null,
           url: null,
           menus: [
             {
               menuid: 72,
-              icon: 'icon-cus-manage',
+              icon: 'el-icon-s-custom',
               menuname: '用户管理',
               hasThird: 'N',
               url: 'system/user',
@@ -86,7 +86,7 @@ export default {
             },
             {
               menuid: 174,
-              icon: 'icon-cms-manage',
+              icon: 'el-icon-notebook-2',
               menuname: '菜单管理',
               hasThird: 'N',
               url: 'system/Module',
@@ -94,7 +94,7 @@ export default {
             },
             {
               menuid: 73,
-              icon: 'icon-news-manage',
+              icon: 'el-icon-user\n',
               menuname: '角色管理',
               hasThird: 'N',
               url: 'system/Role',
@@ -110,7 +110,7 @@ export default {
             },
             {
               menuid: 75,
-              icon: 'icon-promotion-manage',
+              icon: 'el-icon-s-tools',
               menuname: '系统环境变量',
               hasThird: 'N',
               url: 'system/Variable',
@@ -118,7 +118,7 @@ export default {
             },
             {
               menuid: 76,
-              icon: 'icon-cms-manage',
+              icon: 'el-icon-s-check',
               menuname: '权限管理',
               hasThird: 'N',
               url: 'system/Permission',
@@ -128,14 +128,14 @@ export default {
         },
         {
           menuid: 128,
-          icon: 'li-icon-shangchengxitongtubiaozitihuayuanwenjian91',
+          icon: 'el-icon-s-claim',
           menuname: '支付管理',
           hasThird: null,
           url: null,
           menus: [
             {
               menuid: 129,
-              icon: 'icon-provider-manage',
+              icon: 'el-icon-picture-outline-round',
               menuname: '支付配置信息',
               hasThird: 'N',
               url: 'machine/MachineConfig',
@@ -143,7 +143,7 @@ export default {
             },
             {
               menuid: 175,
-              icon: 'icon-provider-manage',
+              icon: 'el-icon-s-home',
               menuname: '支付配置',
               hasThird: 'N',
               url: 'pay/Config',
@@ -153,14 +153,14 @@ export default {
         },
         {
           menuid: 150,
-          icon: 'li-icon-shangchengxitongtubiaozitihuayuanwenjian91',
+          icon: 'el-icon-eleme',
           menuname: '图表',
           hasThird: null,
           url: null,
           menus: [
             {
               menuid: 159,
-              icon: 'icon-provider-manage',
+              icon: 'el-icon-s-goods',
               menuname: '数据可视化',
               hasThird: 'N',
               url: 'charts/statistics',
@@ -211,7 +211,7 @@ export default {
 .el-menu {
   border: none;
 }
-.logobox {
+.logo_box {
   height: 40px;
   line-height: 40px;
   color: #9d9d9d;
@@ -219,7 +219,7 @@ export default {
   text-align: center;
   padding: 20px 0px;
 }
-.logoimg {
+.logo_img {
   height: 40px;
 }
 </style>

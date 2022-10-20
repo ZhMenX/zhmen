@@ -16,6 +16,7 @@ axios.interceptors.request.use(
         //   config.headers['token'] = token;
         // }
         const isToken = (config.headers || {}).isToken === false
+        config.headers.contentType = "application/json; charset=utf-8"
         // do something before request is sent
         if (getToken() && !isToken) {
             config.headers.token = getToken()

@@ -13,26 +13,21 @@
       <el-form-item label="搜索：">
         <el-input size="small" v-model="formInline.title" placeholder="请输入博客标题"></el-input>
       </el-form-item>
-      <el-form-item label="">
-        <el-input size="small" v-model="formInline.description" placeholder="请输入博客摘要"></el-input>
-      </el-form-item>
       <el-form-item>
         <el-button size="small" type="primary" icon="el-icon-search" @click="search">搜索</el-button>
         <el-button size="small" type="primary" icon="el-icon-plus" @click="handleEdit()">添加</el-button>
       </el-form-item>
     </el-form>
     <!--列表-->
-    <el-table size="small" :data="blogs" highlight-current-row v-loading="loading" border element-loading-text="拼命加载中" style="width: 100%;">
+    <el-table size="small" :data="blogs" highlight-current-row style="width: 100%;">
       <el-table-column align="center" type="selection" width="60">
       </el-table-column>
-      <el-table-column sortable prop="title" label="标题" width="300">
+      <el-table-column sortable prop="id" label="序号" v-if="false"></el-table-column>
+      <el-table-column sortable prop="title"  label="标题" width="300">
       </el-table-column>
-      <el-table-column sortable prop="description" label="摘要" width="300">
+      <el-table-column sortable prop="description" label="摘要" width="480">
       </el-table-column>
-      <el-table-column sortable prop="created" label="创建时间" width="300">
-        <template slot-scope="scope">
-          <div>{{scope.row.editTime|timestampToTime}}</div>
-        </template>
+      <el-table-column sortable prop="created"  value-format="timestamp" label="更新时间" width="100">
       </el-table-column>
       <el-table-column align="center" label="操作" min-width="300">
         <template slot-scope="scope">
@@ -44,7 +39,7 @@
     <!-- 分页组件 -->
     <Pagination v-bind:child-msg="pageparm" @callFather="callFather"></Pagination>
     <!-- 编辑界面 -->
-    <el-dialog :title="title" :visible.sync="editFormVisible" width="60%" @click="closeDialog">
+    <el-dialog :title="titleForm" :visible.sync="editFormVisible" width="60%" @click="closeDialog">
       <el-form label-width="120px" :model="editForm" :rules="rules" ref="editForm">
         <el-form-item label="标题" prop="title">
           <el-input size="small" v-model="editForm.title" auto-complete="off" placeholder="请输入博客标题"></el-input>
@@ -57,9 +52,9 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="resetForm('editForm')">重置</el-button>
-        <el-button size="small" @click="closeDialog">取消</el-button>
-        <el-button size="small" type="primary" :loading="loading" class="title" @click="submitForm('editForm')">保存</el-button>
+        <el-button size="medium" @click="resetForm('editForm')" type="info">重置</el-button>
+        <el-button size="medium" @click="closeDialog">取消</el-button>
+        <el-button size="medium" type="primary" class="title" @click="closeDialogAndsubmit()">保存</el-button>
       </div>
     </el-dialog>
   </div>
@@ -67,19 +62,23 @@
 
 <script>
 import Pagination from '../../components/Pagination'
+import {getToken} from "../../api/auth";
 export default {
   data() {
     return {
       nshow: true, //switch开启
       fshow: false, //switch关闭
-      loading: false, //是显示加载
+      isLoad: true, //是显示加载
       editFormVisible: false, //控制编辑页面显示与隐藏
-      title: '添加',
-      editForm: {
+      addTest:false,
+      titleForm: '添加',
+      editForm:{
+        id:'',
+        userId: '',
         title: '',
         description: '',
         content: '',
-        token: localStorage.getItem('login-token')
+        created:'',
       },
       // rules表单验证
       rules: {
@@ -114,22 +113,17 @@ export default {
   components: {
     Pagination
   },
-  /**
-   * 数据发生改变
-   */
-
-  /**
-   * 创建完毕
-   */
   created() {
     this.getBlogs(this.formInline)
+    if (getToken()===null){
+      this.$router.push("/")
+    }
   },
-
-  /**
-   * 里面的方法只有被调用才会执行
-   */
   methods: {
-
+    //对话框测试
+    addTestHanlder(){
+      this.addTest = true
+    },
     //重置编辑
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -137,18 +131,15 @@ export default {
     //获取博客列表
     getBlogs(parameter) {
       this.loading = true
-      /***
-       * 调用接口，注释上面模拟数据 取消下面注释
-       */
-      this.$http.get("/api/article",parameter)
+      this.$http.get("/article", {params:parameter})
           .then(res => {
             this.blogs=[]
             for (let i in res.data.data.content){
               this.blogs.push(res.data.data.content[i])
             }
             // 分页赋值
-            //this.pageparm.currentPage = this.formInline.page
-            //this.pageparm.pageSize = this.formInline.limit
+            this.pageparm.currentPage = this.formInline.currentPage
+            this.pageparm.pageSize = this.formInline.pageSize
             this.pageparm.total = res.data.total
           })
           .catch(err => {
@@ -164,13 +155,24 @@ export default {
     },
     // 搜索事件
     search() {
-      this.getBlogs(this.formInline)
+      this.loading = true
+      this.blogs = []
+      this.$http.get("/articleLike",{params: this.formInline}).then((res) =>{
+        for (let i in res.data.data) {
+          this.blogs.push(res.data.data[i]);
+        }
+        // 分页赋值
+        //this.pageparm.currentPage = this.formInline.page
+        //this.pageparm.pageSize = this.formInline.limit
+        this.pageparm.total = res.data.total
+      })
     },
     //显示编辑界面
     handleEdit: function(index, row) {
       this.editFormVisible = true
       if (row !== undefined && row !== 'undefined') {
         this.title = '修改'
+        this.editForm.id = row.id
         this.editForm.title = row.title
         this.editForm.description = row.description
         this.editForm.content = row.content
@@ -181,31 +183,39 @@ export default {
         this.editForm.content = ''
       }
     },
-    // 编辑、增加页面保存方法
+    //更新,新增博客
     submitForm(editData) {
       this.$refs[editData].validate(valid => {
         if (valid) {
-          deptSave(this.editForm)
+          let blog ={
+            id: this.editForm.id,
+            userId:null,
+            title: this.editForm.title,
+            description: this.editForm.description,
+            content: this.editForm.description,
+            created: new Date()
+          }
+          console.log(blog);
+          this.$http.post("article",this.$qs.parse(blog))
               .then(res => {
                 this.editFormVisible = false
-                this.loading = false
-                if (res.success) {
-                  this.getdata(this.formInline)
+                if (res.data.code===200) {
+                  this.getBlogs(this.formInline)
                   this.$message({
                     type: 'success',
-                    message: '公司保存成功！'
+                    message: res.data.msg
                   })
                 } else {
                   this.$message({
-                    type: 'info',
-                    message: res.msg
+                    type: 'success',
+                    message: res.data.msg
                   })
                 }
               })
               .catch(err => {
                 this.editFormVisible = false
                 this.loading = false
-                this.$message.error('公司保存失败，请稍后再试！')
+                this.$message.error('博客保存失败，请稍后再试！')
               })
         } else {
           return false
@@ -218,29 +228,27 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      })
-          .then(() => {
-            deptDelete(row.deptId)
-                .then(res => {
-                  if (res.success) {
-                    this.$message({
-                      type: 'success',
-                      message: '公司已删除!'
-                    })
-                    this.getdata(this.formInline)
-                  } else {
-                    this.$message({
-                      type: 'info',
-                      message: res.msg
-                    })
-                  }
-                })
-                .catch(err => {
-                  this.loading = false
-                  this.$message.error('公司删除失败，请稍后再试！')
-                })
-          })
-          .catch(() => {
+      }).then(() => {
+        this.$http.delete("/article/"+row.id).then(res => {
+          if (res.data.code === 200) {
+            //刷新列表
+            this.getBlogs(this.formInline)
+            this.$message({
+              type: 'success',
+              message: '博客已经删除!'
+            })
+          }
+          else {
+            this.$message({
+              type: 'info',
+              message: res.data.msg,
+            })
+          }
+        }).catch(err => {
+              this.loading = false
+              this.$message.error('博客删除失败，请稍后再试！')
+            })
+      }).catch(() => {
             this.$message({
               type: 'info',
               message: '已取消删除'
@@ -250,6 +258,10 @@ export default {
     // 关闭编辑、增加弹出框
     closeDialog() {
       this.editFormVisible = false
+    },
+    closeDialogAndsubmit(){
+      this.editFormVisible = false
+      this.submitForm('editForm')
     }
   }
 }

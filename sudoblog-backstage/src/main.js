@@ -4,11 +4,10 @@ import router from './router'
 import store from './store'
 import Element from 'element-ui'
 import axios from 'axios'
-import Bus from 'vue-bus';
 import qs from "qs";
 Vue.prototype.$qs = qs
-Vue.use(Bus);
-
+import VueBus from 'vue-bus'
+Vue.use(VueBus)
 import mavonEditor from 'mavon-editor'
 Vue.use(mavonEditor)
 import "element-ui/lib/theme-chalk/index.css"

@@ -60,14 +60,23 @@
             <el-col :span="24">
               <el-timeline>
                 <el-timeline-item
-                  color="hsv" placement="top" v-for="blog in blogs" style="margin-right: 20px">
+                  color="hsv"
+                  placement="top"
+                  v-for="blog in blogs"
+                  style="margin-right: 20px"
+                >
                   <el-card>
-                      <h4>
-                        <router-link :to="{name: 'ArticleDetail', params: {blogId: blog.id}}">
-                          {{blog.title}}
-                        </router-link>
-                      </h4>
-                      <p>{{blog.description}}</p>
+                    <h4>
+                      <router-link
+                        :to="{
+                          name: 'ArticleDetail',
+                          params: { blogId: blog.id },
+                        }"
+                      >
+                        {{ blog.title }}
+                      </router-link>
+                    </h4>
+                    <p>{{ blog.description }}</p>
                   </el-card>
                 </el-timeline-item>
               </el-timeline>
@@ -115,11 +124,13 @@
         <el-col :span="24">
           <el-divider></el-divider>
         </el-col>
-        <el-col :span="24" >
-          <el-card class="box-card" >
+        <el-col :span="24">
+          <el-card class="box-card">
             <div v-for="o in blogs" :key="o.id">
-              <router-link :to="{name: 'ArticleDetail', params: {blogId: o.id}}">
-                {{o.title}}
+              <router-link
+                :to="{ name: 'ArticleDetail', params: { blogId: o.id } }"
+              >
+                {{ o.title }}
               </router-link>
             </div>
           </el-card>
@@ -128,36 +139,35 @@
       <el-backtop :bottom="100">
         <div
           style="
-                     {
-                      height: 100%;
-                      width: 100%;
-                      background-color: #f2f5f6;
-                      box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
-                      text-align: center;
-                      line-height: 40px;
-                      color: #1989fa;
-                    }
-                  "
+             {
+              height: 100%;
+              width: 100%;
+              background-color: #f2f5f6;
+              box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+              text-align: center;
+              line-height: 40px;
+              color: #1989fa;
+            }
+          "
         >
           UP
         </div>
       </el-backtop>
     </el-col>
-
   </el-row>
 </template>
 
 <script>
 import la from "../../components/Leader";
-import ArticleDetail from "./ArticleDetail"
-import user from "../../components/UserLeader"
+import ArticleDetail from "./ArticleDetail";
+import user from "../../components/UserLeader";
 import { getToken } from "@/api/auth";
 export default {
   name: "Article",
   components: {
     la,
     ArticleDetail,
-    user
+    user,
   },
   created() {
     this.page(1);
@@ -174,42 +184,47 @@ export default {
         pageSize: null,
       },
       blogs: [],
-      titleByLike:{
+      titleByLike: {
         id: "",
         title: "",
         description: "",
         content: "",
         total: "",
       },
-      tableData: [{
-        id: "",
-        title: "",
-        description: "",
-        content: "",
-        total: "",
-        currentPage: null,
-        pageSize: null,
-      }],
-      activeName: 'second'
+      tableData: [
+        {
+          id: "",
+          title: "",
+          description: "",
+          content: "",
+          total: "",
+          currentPage: null,
+          pageSize: null,
+        },
+      ],
+      activeName: "second",
     };
   },
   methods: {
     tableDataSearch() {
-      this.blogs =[]
-      this.$http.get("/articleLike",{params: this.titleByLike}).then((res) => {
-        for (let i in res.data.data){
-          this.blogs.push(res.data.data[i])
-        }
-        console.log(res.data.data)
-        this.pagination.total = res.data.total
-        this.tableData = res.data.data;
-        if (res.data.data.length === 0){
-          alert("根据该关键字找不到对应内容")
-          this.$router.go(0)
-        }
-      }).catch(err =>{
-        console.log("请求错误");
-      });
+      this.blogs = [];
+      this.$http
+        .get("/articleLike", { params: this.titleByLike })
+        .then((res) => {
+          for (let i in res.data.data) {
+            this.blogs.push(res.data.data[i]);
+          }
+          console.log(res.data.data);
+          this.pagination.total = res.data.total;
+          this.tableData = res.data.data;
+          if (res.data.data.length === 0) {
+            alert("根据该关键字找不到对应内容");
+            this.$router.go(0);
+          }
+        })
+        .catch((err) => {
+          console.log("请求错误");
+        });
     },
     arAdd() {
       this.$router.push({ name: "ArticleAdd" });
@@ -218,31 +233,33 @@ export default {
       this.pagination.currentPage = currentPage;
       this.search();
     },
-    search: async function() {
+    search: async function () {
       const _this = this;
       this.searchFrom.currentPage = this.pagination.currentPage;
       this.searchFrom.pageSize = this.pagination.pageSize;
-      let page ={
-        currentPage : this.searchFrom.currentPage,
-        pageSize : this.searchFrom.pageSize
-      }
-      this.$http.get("/article",{params:this.searchFrom})
-        .then(function(res) {
-          _this.blogs=[]
-          for (let i in res.data.data.content){
-            _this.blogs.push(res.data.data.content[i])
-          }
-          _this.pagination.total = res.data.total
-          _this.tableData = res.data.data;
-        }.bind(this))
-        .catch(err =>{
+      let page = {
+        currentPage: this.searchFrom.currentPage,
+        pageSize: this.searchFrom.pageSize,
+      };
+      this.$http
+        .get("/article", { params: this.searchFrom })
+        .then(
+          function (res) {
+            _this.blogs = [];
+            for (let i in res.data.data.content) {
+              _this.blogs.push(res.data.data.content[i]);
+            }
+            _this.pagination.total = res.data.total;
+            _this.tableData = res.data.data;
+          }.bind(this)
+        )
+        .catch((err) => {
           console.log("请求错误");
         });
-
     },
     handleClick(tab, event) {
       console.log(tab, event);
-    }
+    },
   },
 };
 </script>
@@ -266,7 +283,7 @@ text {
   content: "";
 }
 .clearfix:after {
-  clear: both
+  clear: both;
 }
 
 .box-card {

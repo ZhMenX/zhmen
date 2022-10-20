@@ -16,5 +16,8 @@ public interface BlogService {
 
     List<Blog> searchByTitle(String name);
 
+    Blog add(Blog blog);
+
+    void delete(Integer blog);
 
 }

@@ -56,6 +56,20 @@ public class BlogServiceImpl implements BlogService {
 
         return blogDao.SearchByTitle(name);
     }
+    //新增博客
+    @Override
+    public Blog add(Blog blog) {
+        return blogDao.save(blog);
+    }
+    //删除博客
+    @Override
+    public void delete(Integer id) {
+        Optional<Blog> blog = blogDao.findById(id);
+        blogDao.delete(blog.get());
+    }
+
+
+
 
 
 }

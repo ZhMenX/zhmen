@@ -3,7 +3,7 @@
 */
 <template>
   <el-menu class="el-menu-demo" mode="horizontal" background-color="#334157" text-color="#fff" active-text-color="#fff">
-    <el-button class="buttoning">
+    <el-button class="buttoning" >
       <img class="showing" :src="collapsed?imgsq:imgshow" @click="toggle(collapsed)" alt="">
     </el-button>
     <el-submenu index="2" class="submenu">
@@ -92,21 +92,25 @@ export default {
   border: none;
 }
 .submenu {
-  float: right;
+  margin-left: 1100px;
 }
-.buttonimg {
+.buttoning {
   height: 60px;
-  background-color: transparent;
+  background-color: #334157;
+  position: absolute;
   border: none;
 }
-.showimg {
-  width: 26px;
+.buttoning:hover{
+  background-color: #334157;
+  border-color: #334157;
+}
+.showing {
+  width: 24px;
   height: 26px;
-  position: absolute;
   top: 17px;
   left: 17px;
 }
-.showimg:active {
+.showing:active {
   border: none;
 }
 </style>

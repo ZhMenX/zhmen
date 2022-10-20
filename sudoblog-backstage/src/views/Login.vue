@@ -52,7 +52,7 @@ export default {
         console.log("是否是管理员"+res.data.data.isAdmin)
         setIsAdmin(res.data.data.isAdmin);
         console.log(getIsAdmin())
-        this.$router.push("/index")
+        this.$router.push("/Article/Blogs")
         if (res.data.code === 200){
           this.$message({
             message: '恭喜你，登录成功',

@@ -1,7 +1,7 @@
 <template>
 
   <el-container class="index-con">
-    <el-aside :class="showclass">
+    <el-aside :class="showclass" style="background-color: #334157">
       <leftnav></leftnav>
     </el-aside>
     <el-container class="main-con">
@@ -13,8 +13,6 @@
       </el-main>
     </el-container>
   </el-container>
-
-
 </template>
 
 <script>
@@ -24,7 +22,7 @@ export default {
   name: "Index",
   data(){
     return {
-      showclass: 'asideshow',
+      showclass: 'sideshow',
       showtype: false
     }
   },
@@ -33,6 +31,27 @@ export default {
     navcon,
     leftnav
   },
+  created() {
+    // 监听
+    this.$root.$bus.on('toggle', value => {
+      if (value) {
+        this.showclass = 'asideshow'
+      } else {
+        setTimeout(() => {
+          this.showclass = 'aside'
+        }, 0)
+      }
+    })
+  },
+  beforeUpdate() {},
+  // 挂载前状态(里面是操作)
+  beforeMount() {
+    // 弹出登录成功
+    this.$message({
+      message: '登录成功',
+      type: 'success'
+    })
+  }
 }
 </script>
 
@@ -53,11 +72,11 @@ export default {
   width: 240px !important;
   height: 100%;
   background-color: #334157;
-  margin: 0px;
+  margin: 0;
 }
 .index-header,
 .index-main {
-  padding: 0px;
+  padding: 0;
   border-left: 2px solid #333;
 }
 </style>
