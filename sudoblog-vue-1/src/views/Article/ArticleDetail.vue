@@ -1,12 +1,13 @@
 <template>
   <el-row :gutter="10">
-    <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"
+    <el-col :span="24">
+      <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1"
       ><img class="mlogo" src="../../assets/image/background.jpg" alt="LOGO" />
+      </el-col>
+      <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11" :push="11">
+        <la></la>
+      </el-col>
     </el-col>
-    <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11" :push="11">
-      <la></la>
-    </el-col>
-
     <!--文章详情界面-->
     <el-col :span="24">
       <el-divider></el-divider>
@@ -17,13 +18,8 @@
       <el-col :span="16":push="4">
         <div>
           <h2> {{ blog.title }}</h2>
-          <el-link icon="el-icon-edit" v-if="ownBlog">
-            <router-link :to="{name: 'BlogEdit', params: {blogId: blog.id}}" >
-              编辑
-            </router-link>
-          </el-link>
           <el-divider></el-divider>
-          <div class="markdown-body" v-html="blog.content"></div>
+          <div class="markdown-body" v-html="blog.content" style="border: #647eff"></div>
         </div>
       </el-col>
     </el-col>
@@ -51,6 +47,9 @@
 // 导入组件 及 组件样式
 import 'mavon-editor/dist/css/index.css'
 import la from "../../components/Leader";
+import beforeLogin from "@/components/beforeLogin";
+import afterLogin from "@/components/afterLogin";
+import { getIsAdmin, getToken } from "@/api/auth";
 export default {
   name: "ArticleDetail",
   components: {
@@ -63,7 +62,7 @@ export default {
         title: "",
         content: ""
       },
-      ownBlog: false
+      comName: 'beforeLogin',
     }
   },
   created() {
@@ -77,14 +76,24 @@ export default {
       const MardownIt = require("markdown-it");
       const md = new MardownIt();
       _this.blog.content = md.render(blog.content)
-      _this.ownBlog = (blog.userId === _this.$store.getters.getUser.id)
-
     })
+
   },
   methods: {
     goBack() {
       this.$router.push({name: "Article"})
-    }
+    },
+    watchToken(token){
+      if (token!=null){
+        this.comName = 'afterLogin'
+      }
+      else {
+        this.comName = 'beforeLogin'
+      }
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
   },
 };
 </script>

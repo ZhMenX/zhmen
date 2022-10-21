@@ -48,7 +48,7 @@ axios.interceptors.response.use(
     },
     function(error) {
         if (error.response.data.code === 401){
-            this.router.push("/login")
+            this.router.push("/")
         }
     }
 )

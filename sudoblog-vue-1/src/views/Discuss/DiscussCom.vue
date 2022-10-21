@@ -13,7 +13,7 @@
 import la from "@/components/Leader";
 
 export default {
-  name: "discuss-mysql",
+  name: "DiscussCom",
   components: {
     la,
   },

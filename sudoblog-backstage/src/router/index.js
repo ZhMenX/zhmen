@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Index from '../views/Index'
-import Blogs from "@/views/Article/Blogs";
+import Blogs from "../views/Article/Blogs";
+import Discusses from "../views/Article/Discusses";
 import {getToken} from "../api/auth";
 Vue.use(VueRouter)
 
@@ -17,6 +18,14 @@ const routes = [
         path: '/Article/Blogs',
         name: '商品管理',
         component: Blogs,
+        meta: {
+          requireAuth: true
+        }
+      },
+      {
+        path: '/Article/Discusses',
+        name: '讨论区管理',
+        component: Discusses,
         meta: {
           requireAuth: true
         }

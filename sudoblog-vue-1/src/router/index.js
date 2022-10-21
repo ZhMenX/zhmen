@@ -41,7 +41,7 @@ const routes = [
     {
         path: "/discussAdd",
         name: "DiscussAdd",
-        component: () => import("../views/Discuss/DiscussAdd"),
+        component: () => import("../views/Discuss/DiscussCom"),
         meta: {
             title: '',
             requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录的

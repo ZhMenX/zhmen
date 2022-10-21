@@ -13,7 +13,7 @@
       </template>
       <el-menu-item-group>
         <el-menu-item v-for="chmenu in menu.menus" :index="'/'+chmenu.url" :key="chmenu.menuid">
-          <i class="iconfont" :class="chmenu.icon"></i>
+          <i class="iconfont" :class="chmenu.icon" style="margin-right: 10px"></i>
           <span>{{chmenu.menuname}}</span>
         </el-menu-item>
       </el-menu-item-group>
@@ -48,6 +48,14 @@ export default {
               menuname: '博客管理',
               hasThird: 'N',
               url: 'Article/Blogs',
+              menus: null
+            },
+            {
+              menuid: 3,
+              icon: 'el-icon-reading',
+              menuname: '讨论管理',
+              hasThird: 'N',
+              url: 'Article/Discusses',
               menus: null
             }
           ]

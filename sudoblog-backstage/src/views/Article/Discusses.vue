@@ -6,7 +6,7 @@
     <!-- 面包屑导航 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>文章管理</el-breadcrumb-item>
+      <el-breadcrumb-item>讨论管理</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 搜索筛选 -->
     <el-form :inline="true" :model="formInline" class="user-search">
@@ -64,6 +64,8 @@
 import Pagination from '../../components/Pagination'
 import {getToken} from "../../api/auth";
 export default {
+  name: "Discusses"
+  ,
   data() {
     return {
       nshow: true, //switch开启
@@ -245,15 +247,15 @@ export default {
             })
           }
         }).catch(err => {
-              this.loading = false
-              this.$message.error('博客删除失败，请稍后再试！')
-            })
+          this.loading = false
+          this.$message.error('博客删除失败，请稍后再试！')
+        })
       }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            })
-          })
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     // 关闭编辑、增加弹出框
     closeDialog() {

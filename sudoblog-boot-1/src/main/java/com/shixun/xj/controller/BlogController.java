@@ -40,6 +40,12 @@ public class BlogController {
         Page<Blog> blogs = blogService.search(currentPage, pageSize);
         return Result.success(blogs, blogs.getTotalElements());
     }
+    @GetMapping("/article/{id}")
+    public Result BlogDetail(@PathVariable("id") Integer id) {
+
+        Optional<Blog> blog = blogService.searchById(id);
+        return Result.success(blog.get(),(long)1);
+    }
 
     //新增，更新博客
     @PostMapping("/article")

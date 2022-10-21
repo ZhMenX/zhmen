@@ -10,8 +10,7 @@
       <!-- <template slot="title">{{user.userRealName}}</template> -->
       <template slot="title">超级管理员</template>
       <el-menu-item index="2-1">设置</el-menu-item>
-      <el-menu-item @click="content()" index="2-2">个人中心</el-menu-item>
-      <el-menu-item @click="exit()" index="2-3">退出</el-menu-item>
+      <el-menu-item @click="exit()" index="2-2">返回前台</el-menu-item>
     </el-submenu>
   </el-menu>
 </template>
@@ -33,44 +32,34 @@ export default {
   methods: {
     // 退出登录
     exit() {
-      this.$confirm('退出登录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('返回前台需要退出登录, 是否继续?', '提示', {
+        confirmButtonText: '退出',
         cancelButtonText: '取消',
         type: 'warning'
-      })
-        .then(() => {
-          setTimeout(() => {
-            this.$store.commit('logout', 'false')
-            this.$router.push({ path: '/login' })
-            this.$message({
-              type: 'success',
-              message: '已退出登录!'
+      }).then(() => {
+          this.$http.get("/user/logout")
+            .then(res => {
+              if (res.data.code === 200) {
+                //如果请求成功就让他2秒跳转路由
+                setTimeout(() => {
+                  this.$store.commit('logout', 'false')
+                  this.$router.push({ path: '/' })
+                  this.$message({
+                    type: 'success',
+                    message: '已退出登录!'
+                  })
+                }, 1000)
+                window.location.href = "http://localhost:8080/#/"  // 这个地址是你要跳转的项目url。
+              } else {
+                this.$message.error(res.data.msg)
+                this.logining = false
+                return false
+              }
             })
-          }, 1000)
-          // loginout()
-          //   .then(res => {
-          //     if (res.success) {
-          //       //如果请求成功就让他2秒跳转路由
-          //       setTimeout(() => {
-          //         this.$store.commit('logout', 'false')
-          //         this.$router.push({ path: '/login' })
-          //         this.$message({
-          //           type: 'success',
-          //           message: '已退出登录!'
-          //         })
-          //       }, 1000)
-          //     } else {
-          //       this.$message.error(res.msg)
-          //       this.logining = false
-          //       return false
-          //     }
-          //   })
-          //   .catch(err => {
-          //     // 获取图形验证码
-          //     this.getcode()
-          //     this.logining = false
-          //     this.$message.error('退出失败，请稍后再试！')
-          //   })
+            .catch(err => {
+              this.logining = false
+              this.$message.error('退出失败，请稍后再试！')
+            })
         })
         .catch(() => {
           this.$message({
@@ -78,6 +67,7 @@ export default {
             message: '已取消'
           })
         })
+
     },
     // 切换显示
     toggle(showtype) {

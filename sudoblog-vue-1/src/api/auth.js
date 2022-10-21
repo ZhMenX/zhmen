@@ -11,7 +11,19 @@ export function setToken (token) {
 export function removeToken () {
   return localStorage.removeItem(TokenKey)
 }
+const dialogVisible = 'dialog'
 
+export function getDialogVisible () {
+  return localStorage.getItem(dialogVisible)
+}
+
+export function setDialogVisible (dia) {
+  return localStorage.setItem(dialogVisible, dia)
+}
+
+export function removeDialogVisible () {
+  return localStorage.removeItem(dialogVisible)
+}
 const UserInfo = 'userInfo'
 
 export function getUserInfo(){
